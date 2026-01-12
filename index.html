@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title > ALi ELAZZAOUI</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #000;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+        }
+
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #fff;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 20px 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: #0ff;
+            text-decoration: none;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 5px 10px;
+        }
+
+        nav a::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #0ff;
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::before {
+            width: 100%;
+        }
+
+        nav a:hover {
+            text-shadow: 0 0 10px #0ff;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+            padding: 100px 20px 50px;
+        }
+
+        .glitch {
+            font-size: 5em;
+            font-weight: bold;
+            text-transform: uppercase;
+            position: relative;
+            color: #0ff;
+            animation: glitch 1s linear infinite;
+        }
+
+        .glitch::before,
+        .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .glitch::before {
+            left: 2px;
+            text-shadow: -2px 0 #f0f;
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim 5s infinite linear alternate-reverse;
+        }
+
+        .glitch::after {
+            left: -2px;
+            text-shadow: -2px 0 #00ff00;
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim2 5s infinite linear alternate-reverse;
+        }
+
+        .subtitle {
+            font-size: 1.5em;
+            margin-top: 20px;
+            color: #0ff;
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards;
+            animation-delay: 0.5s;
+        }
+
+        section {
+            padding: 80px 20px;
+            position: relative;
+        }
+
+        .section-title {
+            font-size: 3em;
+            text-align: center;
+            margin-bottom: 50px;
+            color: #0ff;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            position: relative;
+            animation: slideIn 1s ease;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #0ff, transparent);
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .card {
+            background: rgba(0, 255, 255, 0.05);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            border-radius: 15px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(0, 255, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.5s ease;
+        }
+
+        .card:hover::before {
+            left: 100%;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: #0ff;
+            box-shadow: 0 10px 40px rgba(0, 255, 255, 0.3);
+        }
+
+        .card h3 {
+            color: #0ff;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+
+        .about-box {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(0, 255, 255, 0.05);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            border-radius: 20px;
+            padding: 50px;
+            font-size: 1.2em;
+            line-height: 1.8;
+            animation: fadeIn 1s ease;
+        }
+
+        .social-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .social-btn {
+            background: transparent;
+            border: 2px solid #0ff;
+            color: #0ff;
+            padding: 20px 30px;
+            border-radius: 15px;
+            text-decoration: none;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            font-weight: 500;
+        }
+
+        .social-btn i {
+            font-size: 1.3em;
+            transition: transform 0.3s ease;
+        }
+
+        .social-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .social-btn:hover::before {
+            left: 100%;
+        }
+
+        .social-btn:hover {
+            background: rgba(0, 255, 255, 0.1);
+            border-color: #0ff;
+            box-shadow: 0 0 25px rgba(0, 255, 255, 0.4);
+            transform: translateY(-3px);
+        }
+
+        .social-btn:hover i {
+            transform: scale(1.2);
+        }
+
+        .social-btn span {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Individual social button colors */
+        .social-btn.facebook:hover {
+            border-color: #1877f2;
+            box-shadow: 0 0 25px rgba(24, 119, 242, 0.4);
+        }
+
+        .social-btn.instagram:hover {
+            border-color: #e1306c;
+            box-shadow: 0 0 25px rgba(225, 48, 108, 0.4);
+        }
+
+        .social-btn.twitter:hover {
+            border-color: #1da1f2;
+            box-shadow: 0 0 25px rgba(29, 161, 242, 0.4);
+        }
+
+        .social-btn.linkedin:hover {
+            border-color: #0077b5;
+            box-shadow: 0 0 25px rgba(0, 119, 181, 0.4);
+        }
+
+        .social-btn.github:hover {
+            border-color: #ffffff;
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.4);
+        }
+
+        .social-btn.youtube:hover {
+            border-color: #ff0000;
+            box-shadow: 0 0 25px rgba(255, 0, 0, 0.4);
+        }
+
+        .social-btn.discord:hover {
+            border-color: #5865f2;
+            box-shadow: 0 0 25px rgba(88, 101, 242, 0.4);
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 50px auto;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .input-group {
+            position: relative;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 15px;
+            background: rgba(0, 255, 255, 0.05);
+            border: 2px solid rgba(0, 255, 255, 0.3);
+            border-radius: 10px;
+            color: #fff;
+            font-size: 1em;
+            transition: all 0.3s ease;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #0ff;
+            background: rgba(0, 255, 255, 0.1);
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+        }
+
+        input::placeholder, textarea::placeholder {
+            color: rgba(0, 255, 255, 0.5);
+        }
+
+        .submit-btn {
+            background: transparent;
+            border: 2px solid #0ff;
+            color: #0ff;
+            padding: 15px 40px;
+            font-size: 1.2em;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .submit-btn:hover {
+            background: #0ff;
+            color: #000;
+            box-shadow: 0 0 30px #0ff;
+            transform: scale(1.05);
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
+        }
+
+        @keyframes glitch {
+            2%, 64% { transform: translate(2px,0) skew(0deg); }
+            4%, 60% { transform: translate(-2px,0) skew(0deg); }
+            62% { transform: translate(0,0) skew(5deg); }
+        }
+
+        @keyframes glitch-anim {
+            0% { clip: rect(10px, 9999px, 31px, 0); }
+            20% { clip: rect(85px, 9999px, 140px, 0); }
+            40% { clip: rect(27px, 9999px, 98px, 0); }
+            60% { clip: rect(68px, 9999px, 23px, 0); }
+            80% { clip: rect(123px, 9999px, 78px, 0); }
+            100% { clip: rect(54px, 9999px, 105px, 0); }
+        }
+
+        @keyframes glitch-anim2 {
+            0% { clip: rect(65px, 9999px, 119px, 0); }
+            20% { clip: rect(90px, 9999px, 36px, 0); }
+            40% { clip: rect(12px, 9999px, 88px, 0); }
+            60% { clip: rect(77px, 9999px, 45px, 0); }
+            80% { clip: rect(33px, 9999px, 127px, 0); }
+            100% { clip: rect(101px, 9999px, 15px, 0); }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .glitch { font-size: 3em; }
+            .section-title { font-size: 2em; }
+            nav ul { gap: 20px; }
+            .about-box { padding: 30px; }
+            .social-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                gap: 15px;
+            }
+            .social-btn {
+                padding: 15px 20px;
+                font-size: 0.95em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .social-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .lang-selector {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1001;
+            display: flex;
+            gap: 10px;
+        }
+
+        .lang-btn {
+            background: transparent;
+            border: 2px solid #0ff;
+            color: #0ff;
+            padding: 8px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .lang-btn:hover {
+            background: rgba(0, 255, 255, 0.1);
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+        }
+
+        .lang-btn.active {
+            background: #0ff;
+            color: #000;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+        }
+
+        html[lang="ar"] {
+            direction: rtl;
+        }
+
+        html[lang="ar"] nav ul {
+            flex-direction: row-reverse;
+        }
+
+        html[lang="ar"] .lang-selector {
+            left: 20px;
+            right: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation"></div>
+    <div class="stars" id="stars"></div>
+
+    <!-- Language Selector -->
+    <div class="lang-selector">
+        <button class="lang-btn active" onclick="changeLanguage('en')">EN</button>
+        <button class="lang-btn" onclick="changeLanguage('fr')">FR</button>
+        <button class="lang-btn" onclick="changeLanguage('ar')">AR</button>
+    </div>
+
+    <nav>
+        <ul>
+            <li><a href="#home" data-en="Home" data-fr="Accueil" data-ar="الرئيسية">Home</a></li>
+            <li><a href="#about" data-en="About" data-fr="À propos" data-ar="حول">About</a></li>
+            <li><a href="#skills" data-en="Skills" data-fr="Compétences" data-ar="المهارات">Skills</a></li>
+            <li><a href="#social" data-en="Social" data-fr="Réseaux sociaux" data-ar="وسائل التواصل">Social</a></li>
+            <li><a href="#contact" data-en="Contact" data-fr="Contact" data-ar="تواصل">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <section class="hero" id="home">
+            <h1 class="glitch" data-text="Ali ELAZZAOUI">Ali ELAZZAOUI</h1>
+            <p class="subtitle" data-en="Web Developer • Video Editor • Content Creator" data-fr="Développeur Web • Éditeur Vidéo • Créateur de Contenu" data-ar="مطور الويب • محرر الفيديو • منشئ المحتوى">  Web Developer • Video Editor • Content Creator</p>
+        </section>
+
+        <section id="about">
+            <h2 class="section-title" data-en="About Me" data-fr="À propos de moi" data-ar="حولي">About Me</h2>
+            <div class="about-box">
+                <p data-en="I am Ali, a 22-year-old technology enthusiast from Algeria. I have a strong interest in software development, with a focus on web technologies, Java, and database systems. I enjoy building creative digital projects, including websites, applications, and interactive solutions. In addition to development, I enjoy creating and editing videos, combining technical skills with creativity to produce engaging digital content. My goal is to continuously develop my skills, work on meaningful projects, and build a strong professional future in the technology field." data-fr="Je m'appelle Ali, un passionné de technologie de 22 ans en provenance d'Algérie. J'ai un intérêt marqué pour le développement logiciel, en mettant l'accent sur les technologies web, Java et les systèmes de bases de données. J'aime créer des projets numériques créatifs, y compris des sites Web, des applications et des solutions interactives. En plus du développement, j'aime créer et éditer des vidéos, combinant des compétences techniques avec la créativité pour produire un contenu numérique attrayant. Mon objectif est de développer continuellement mes compétences, de travailler sur des projets significatifs et de construire un avenir professionnel solide dans le domaine de la technologie." data-ar="أنا علي، شاب شغوف للتكنولوجيا يبلغ من العمر 22 سنة من الجزائر. لدي اهتمام قوي بتطوير البرمجيات، مع التركيز على تقنيات الويب وجافا وأنظمة قواعد البيانات. أستمتع بإنشاء مشاريع رقمية إبداعية، بما في ذلك مواقع الويب والتطبيقات والحلول التفاعلية. بالإضافة إلى التطوير، أستمتع بإنشاء وتحرير مقاطع الفيديو، وجمع المهارات الفنية مع الإبداع لإنتاج محتوى رقمي جذاب. هدفي هو تطوير مهاراتي بشكل مستمر، والعمل على مشاريع ذات مغزى، وبناء مستقبل مهني قوي في مجال التكنولوجيا.">I am Ali, a 22-year-old technology enthusiast from Algeria.
+I have a strong interest in software development, with a focus on web technologies, Java, and database systems. I enjoy building creative digital projects, including websites, applications, and interactive solutions.
+
+In addition to development, I enjoy creating and editing videos, combining technical skills with creativity to produce engaging digital content.
+
+My goal is to continuously develop my skills, work on meaningful projects, and build a strong professional future in the technology field.</p>
+            </div>
+        </section>
+
+        <section id="skills">
+            <h2 class="section-title" data-en="My Skills" data-fr="Mes compétences" data-ar="مهاراتي">My Skills</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <h3>💻 <span data-en="Development" data-fr="Développement" data-ar="التنمية">Development</span></h3>
+                    <p data-en="Building robust and scalable applications with clean, efficient code. Expertise in modern frameworks and best practices." data-fr="Construire des applications robustes et évolutives avec un code propre et efficace. Expertise dans les frameworks modernes et les meilleures pratiques." data-ar="بناء التطبيقات القوية والقابلة للتوسع مع كود نظيف وفعال. الخبرة في الأطر الحديثة وأفضل الممارسات.">Building robust and scalable applications with clean, efficient code. Expertise in modern frameworks and best practices.</p>
+                </div>
+                <div class="card">
+                    <h3>🎬 <span data-en="Video Editor" data-fr="Éditeur Vidéo" data-ar="محرر الفيديو">Video Editor</span></h3>
+                    <p data-en="Creating beautiful, intuitive interfaces that users love. Focus on user experience and visual storytelling." data-fr="Créer des interfaces belles et intuitives que les utilisateurs adorent. Accent sur l'expérience utilisateur et la narration visuelle." data-ar="إنشاء واجهات جميلة وحدسية يحبها المستخدمون. التركيز على تجربة المستخدم والسرد البصري.">Creating beautiful, intuitive interfaces that users love. Focus on user experience and visual storytelling.</p>
+                </div>
+                <div class="card">
+                    <h3>🚀 <span data-en="Innovation" data-fr="Innovation" data-ar="الابتكار">Innovation</span></h3>
+                    <p data-en="Always exploring new technologies and methodologies. Staying ahead of trends to deliver cutting-edge solutions." data-fr="Toujours explorer les nouvelles technologies et méthodologies. Rester à l'avant-garde des tendances pour offrir des solutions de pointe." data-ar="استكشاف التقنيات والمنهجيات الجديدة دائماً. البقاء في طليعة الاتجاهات لتقديم حلول متطورة.">Always exploring new technologies and methodologies. Staying ahead of trends to deliver cutting-edge solutions.</p>
+                </div>
+                
+            </div>
+        </section>
+
+        <section id="social">
+            <h2 class="section-title" data-en="You can find me here" data-fr="Vous pouvez me trouver ici" data-ar="يمكنك أن تجدني هنا">You can find me here</h2>
+            <div class="social-grid">
+                <a href="https://www.facebook.com/alielz01/" target="_blank" rel="noopener noreferrer" class="social-btn facebook">
+                    <i class="fab fa-facebook"></i>
+                    <span>Facebook</span>
+                </a>
+                <a href="https://www.instagram.com/alielz01/" target="_blank" rel="noopener noreferrer" class="social-btn instagram">
+                    <i class="fab fa-instagram"></i>
+                    <span>Instagram</span>
+                </a>
+                <a href="https://x.com/AliELAZZAOUI01" target="_blank" rel="noopener noreferrer" class="social-btn twitter">
+                    <i class="fab fa-x-twitter"></i>
+                    <span>X/Twitter</span>
+                </a>
+                <a href="https://www.linkedin.com/in/ali-elazzaoui-3b37b43a4/" target="_blank" rel="noopener noreferrer" class="social-btn linkedin">
+                    <i class="fab fa-linkedin"></i>
+                    <span>LinkedIn</span>
+                </a>
+                <a href="https://github.com/alielazzaoui" target="_blank" rel="noopener noreferrer" class="social-btn github">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+              <a href="https://discord.gg/YtWQCqeStS" target="_blank" rel="noopener noreferrer" class="social-btn discord">
+                    <i class="fab fa-discord"></i>
+                    <span>Discord</span>
+                </a>
+                   <a href="https://www.youtube.com/@alielz1370" target="_blank" rel="noopener noreferrer" class="social-btn youtube">
+                    <i class="fab fa-youtube"></i>
+                    <span>YouTube</span>
+               
+                </a>
+                  <a href="https://www.twitch.tv/aliellz" target="_blank" rel="noopener noreferrer" class="social-btn twitch">
+                    <i class="fab fa-twitch"></i>
+                    <span>Twitch</span>
+                     </a>
+                     <a href="https://kick.com/alielz" target="_blank" rel="noopener noreferrer" class="social-btn k">
+    <i class="fas fa-k"></i>
+    <span>Kick</span>
+</a>
+                     </a>
+            </div>
+        </section>
+
+       
+
+
+
+
+
+
+<section id="contact">
+  <h2 class="section-title"
+      data-en="Get In Touch"
+      data-fr="Prenez contact"
+      data-ar="تواصل معنا">
+      Get In Touch
+  </h2>
+
+  <form class="contact-form" id="contact-form">
+
+    <div class="input-group">
+      <input type="text"
+             name="from_name"
+             placeholder="Your Name"
+             data-en="Your Name"
+             data-fr="Votre nom"
+             data-ar="اسمك"
+             required>
+    </div>
+
+    <div class="input-group">
+      <input type="email"
+             name="from_email"
+             placeholder="Your Email"
+             data-en="Your Email"
+             data-fr="Votre email"
+             data-ar="بريدك الإلكتروني"
+             required>
+    </div>
+
+    <div class="input-group">
+      <textarea rows="6"
+                name="message"
+                placeholder="Your Message"
+                data-en="Your Message"
+                data-fr="Votre message"
+                data-ar="رسالتك"
+                required></textarea>
+    </div>
+
+    <button type="submit"
+            class="submit-btn"
+            data-en="Send Message"
+            data-fr="Envoyer le message"
+            data-ar="إرسال الرسالة">
+      Send Message
+    </button>
+
+  </form>
+</section>
+
+
+
+    <script>
+        // Translation data
+        const translations = {
+            en: {
+                'Facebook': 'Facebook',
+                'Instagram': 'Instagram',
+                'X/Twitter': 'X/Twitter',
+                'LinkedIn': 'LinkedIn',
+                'GitHub': 'GitHub',
+                'Discord': 'Discord',
+                'YouTube': 'YouTube',
+                'Twitch': 'Twitch',
+                'Kick': 'Kick'
+            },
+            fr: {
+                'Facebook': 'Facebook',
+                'Instagram': 'Instagram',
+                'X/Twitter': 'X/Twitter',
+                'LinkedIn': 'LinkedIn',
+                'GitHub': 'GitHub',
+                'Discord': 'Discord',
+                'YouTube': 'YouTube',
+                'Twitch': 'Twitch',
+                'Kick': 'Kick'
+            },
+            ar: {
+                'Facebook': 'فيسبوك',
+                'Instagram': 'إنستغرام',
+                'X/Twitter': 'إكس/تويتر',
+                'LinkedIn': 'لينكد إن',
+                'GitHub': 'جيت هاب',
+                'Discord': 'ديسكورد',
+                'YouTube': 'يوتيوب',
+                'Twitch': 'تويتش',
+                'Kick': 'كيك'
+            }
+        };
+
+        // Change language function
+        function changeLanguage(lang) {
+            // Update HTML lang attribute
+            document.documentElement.lang = lang;
+            
+            // Save preference to localStorage
+            localStorage.setItem('preferredLanguage', lang);
+            
+            // Update all elements with data attributes
+            document.querySelectorAll('[data-en]').forEach(element => {
+                if (element.dataset[lang]) {
+                    // For form inputs and textareas
+                    if (element.hasAttribute('placeholder')) {
+                        element.setAttribute('placeholder', element.dataset[lang]);
+                    } else {
+                        element.textContent = element.dataset[lang];
+                    }
+                }
+            });
+
+            // Update social buttons
+            document.querySelectorAll('.social-btn span').forEach(btn => {
+                const text = btn.textContent.trim();
+                if (translations[lang][text]) {
+                    btn.textContent = translations[lang][text];
+                }
+            });
+
+            // Update language buttons
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector(`.lang-btn[onclick="changeLanguage('${lang}')"]`).classList.add('active');
+        }
+
+        // Load saved language preference on page load
+        window.addEventListener('DOMContentLoaded', function() {
+            const savedLanguage = localStorage.getItem('preferredLanguage') || 'en';
+            changeLanguage(savedLanguage);
+        });
+
+        // Create stars
+        const starsContainer = document.getElementById('stars');
+        for (let i = 0; i < 200; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 3 + 's';
+            star.style.animationDuration = (Math.random() * 2 + 2) + 's';
+            starsContainer.appendChild(star);
+        }
+
+        function handleSubmit(e) {
+            e.preventDefault();
+            const messages = {
+                en: 'Message sent! Thank you for reaching out.',
+                fr: 'Message envoyé! Merci de nous avoir contactés.',
+                ar: 'تم إرسال الرسالة! شكراً للتواصل معنا.'
+            };
+            const currentLang = document.documentElement.lang || 'en';
+            alert(messages[currentLang]);
+            e.target.reset();
+        }
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
+<script>
+  (function () {
+    emailjs.init("dhAiC-9VostpZDM2R");
+  })();
+
+  document.getElementById("contact-form").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    emailjs.sendForm(
+      "service_leev4zr",
+      "template_evwa1nt",
+      this
+    ).then(
+      function () {
+        alert("Message sent successfully ✅");
+        document.getElementById("contact-form").reset();
+      },
+      function (error) {
+        alert("Error ❌ " + error.text);
+      }
+    );
+  });
+</script>
+
+</body>
+</html>
