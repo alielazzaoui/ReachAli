@@ -26,7 +26,7 @@
             width: 100%;
             height: 100%;
             z-index: -1;
-            background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+            background: radial-gradient(ellipse at bottom, #0a1118 0%, #020305 100%);
         }
 
         .stars {
@@ -50,29 +50,44 @@
         nav {
             position: fixed;
             top: 0;
-            width: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(10px);
-            padding: 20px 0;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(50px);
+            padding: 15px 0;
             z-index: 1000;
-            border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+            border: 1px solid rgba(0, 255, 255, 0.35);
+            margin: 10px 0 0 0;
+            border-radius: 15px;
+            width: 60%;
+            max-width: 900px;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            opacity: 1;
+            box-shadow: 0 0 25px rgba(0, 255, 255, 0.1);
+        }
+
+        nav.hidden {
+            opacity: 0;
+            pointer-events: none;
         }
 
         nav ul {
             list-style: none;
             display: flex;
             justify-content: center;
-            gap: 40px;
+            gap: 20px;
             flex-wrap: wrap;
         }
 
         nav a {
             color: #0ff;
             text-decoration: none;
-            font-size: 1.1em;
+            font-size: 0.95em;
             transition: all 0.3s ease;
             position: relative;
-            padding: 5px 10px;
+            padding: 5px 12px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
         }
 
         nav a::before {
@@ -98,6 +113,7 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
+            padding-top: 100px;
         }
 
         .hero {
@@ -500,7 +516,21 @@
         @media (max-width: 768px) {
             .glitch { font-size: 3em; }
             .section-title { font-size: 2em; }
-            nav ul { gap: 20px; }
+            nav { 
+                width: 95% !important;
+                padding: 10px 0;
+                margin: 5px 0 0 0;
+            }
+            nav ul { 
+                gap: 8px; 
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            nav a { 
+                font-size: 0.7em; 
+                padding: 2px 4px; 
+                white-space: nowrap;
+            }
             .about-box { padding: 30px; }
             .social-grid {
                 grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -510,11 +540,149 @@
                 padding: 15px 20px;
                 font-size: 0.95em;
             }
+            .card { padding: 20px; }
+            .project-card { padding: 20px; }
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            .lang-selector {
+                top: 12px;
+                right: 12px;
+                gap: 4px;
+                z-index: 1002;
+            }
+            .lang-btn {
+                padding: 5px 8px;
+                font-size: 0.65em;
+                border-radius: 4px;
+            }
+            .container {
+                padding: 15px;
+                margin-top: 80px;
+            }
         }
 
         @media (max-width: 480px) {
+            body {
+                font-size: 14px;
+            }
+            .glitch { 
+                font-size: 1.8em;
+                margin-top: 60px;
+            }
+            .subtitle {
+                font-size: 0.7em;
+            }
+            .section-title { font-size: 1.2em; }
+            nav { 
+                width: 98% !important;
+                padding: 12px 0 !important;
+                margin: 3px auto 0 auto !important;
+                left: 50% !important;
+                transform: translateX(-50%);
+            }
+            nav ul { 
+                gap: 8px;
+                flex-wrap: wrap;
+                justify-content: center;
+                padding: 0 5px;
+            }
+            nav a { 
+                font-size: 0.75em !important;
+                padding: 4px 6px !important;
+                white-space: nowrap;
+                display: inline-block;
+            }
+            nav a::before {
+                height: 2px;
+            }
+            .container { 
+                padding: 8px !important;
+                margin-top: 80px;
+                padding-top: 80px !important;
+            }
             .social-grid {
                 grid-template-columns: 1fr;
+                gap: 8px;
+            }
+            .social-btn {
+                padding: 8px 10px;
+                font-size: 0.75em;
+            }
+            .card { 
+                padding: 10px; 
+                margin-bottom: 8px;
+            }
+            .card h3 { font-size: 0.95em; }
+            .card p { font-size: 0.8em; }
+            .project-card { 
+                padding: 10px; 
+                margin-bottom: 8px;
+            }
+            .project-card h3 { font-size: 0.95em; }
+            .project-card p { font-size: 0.8em; }
+            .card-grid {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+            .projects-grid {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+            .contact-form {
+                gap: 10px;
+            }
+            input, textarea {
+                padding: 6px;
+                font-size: 0.85em;
+            }
+            .lang-selector {
+                top: 12px;
+                right: 12px;
+                gap: 4px;
+                z-index: 1002;
+            }
+            .lang-toggle {
+                width: 32px;
+                height: 32px;
+                padding: 6px 8px;
+                font-size: 0.9em;
+            }
+            .lang-dropdown {
+                top: 45px;
+                right: 0;
+            }
+            .lang-dropdown button {
+                padding: 8px 12px;
+                font-size: 0.7em;
+            }
+            .hero {
+                min-height: 70vh;
+                padding-top: 60px;
+            }
+            .about-box {
+                padding: 10px;
+                font-size: 0.85em;
+            }
+            .project-links {
+                flex-direction: column;
+                gap: 6px;
+            }
+            .project-link {
+                padding: 6px 10px;
+                font-size: 0.65em;
+                width: 100%;
+                justify-content: center;
+            }
+            .project-link i {
+                font-size: 0.9em;
+            }
+            .submit-btn {
+                padding: 8px 15px;
+                font-size: 0.9em;
+            }
+            section {
+                padding: 20px 0;
             }
         }
 
@@ -525,31 +693,91 @@
             z-index: 1001;
             display: flex;
             gap: 10px;
+            align-items: center;
         }
 
-        .lang-btn {
+        .lang-selector-nav {
+            position: relative;
+            display: flex;
+            align-items: center;
+            margin-left: 0;
+            margin-right: 0;
+        }
+
+        .lang-toggle {
             background: transparent;
-            border: 2px solid #0ff;
+            border: none;
             color: #0ff;
-            padding: 8px 15px;
+            padding: 0;
             border-radius: 8px;
             cursor: pointer;
-            font-size: 0.9em;
-            font-weight: 600;
+            font-size: 1.2em;
             transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: auto;
+            height: auto;
+        }
+
+        .lang-toggle:hover {
+            text-shadow: 0 0 15px rgba(0, 255, 255, 0.6);
+            transform: scale(1.2);
+        }
+
+        .lang-dropdown {
+            position: absolute;
+            top: calc(100% + 8px);
+            right: 0;
+            background: rgba(0, 0, 0, 0.95);
+            border: 2px solid #0ff;
+            border-radius: 12px;
+            backdrop-filter: blur(20px);
+            display: none;
+            flex-direction: column;
+            gap: 0;
+            z-index: 1002;
+            box-shadow: 0 0 25px rgba(0, 255, 255, 0.2);
+            overflow: hidden;
+            min-width: 150px;
+        }
+
+        .lang-dropdown.active {
+            display: flex;
+        }
+
+        .lang-dropdown button {
+            background: transparent;
+            border: none;
+            color: #0ff;
+            padding: 10px 16px;
+            text-align: left;
+            cursor: pointer;
+            font-size: 0.85em;
+            font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 1px;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(0, 255, 255, 0.1);
         }
 
-        .lang-btn:hover {
-            background: rgba(0, 255, 255, 0.1);
-            box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+        .lang-dropdown button:last-child {
+            border-bottom: none;
         }
 
-        .lang-btn.active {
+        .lang-dropdown button:hover {
+            background: rgba(0, 255, 255, 0.15);
+            padding-left: 20px;
+        }
+
+        .lang-dropdown button.active {
             background: #0ff;
             color: #000;
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+        }
+
+        .lang-selector.hidden {
+            opacity: 0;
+            pointer-events: none;
         }
 
         html[lang="ar"] {
@@ -564,26 +792,99 @@
             left: 20px;
             right: auto;
         }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .project-card {
+            background: rgba(0, 255, 255, 0.05);
+            border: 2px solid rgba(0, 255, 255, 0.3);
+            border-radius: 15px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.6s ease forwards;
+            opacity: 0;
+        }
+
+        .project-card:hover {
+            background: rgba(0, 255, 255, 0.1);
+            border-color: #0ff;
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+            transform: translateY(-10px);
+        }
+
+        .project-card h3 {
+            color: #0ff;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .project-card p {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: transparent;
+            border: 2px solid #0ff;
+            color: #0ff;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 0.95em;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .project-link:hover {
+            background: #0ff;
+            color: #000;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+        }
+
+        .project-link i {
+            font-size: 1.1em;
+        }
     </style>
 </head>
 <body>
     <div class="bg-animation"></div>
     <div class="stars" id="stars"></div>
 
-    <!-- Language Selector -->
-    <div class="lang-selector">
-        <button class="lang-btn active" onclick="changeLanguage('en')">EN</button>
-        <button class="lang-btn" onclick="changeLanguage('fr')">FR</button>
-        <button class="lang-btn" onclick="changeLanguage('ar')">AR</button>
-    </div>
-
     <nav>
         <ul>
             <li><a href="#home" data-en="Home" data-fr="Accueil" data-ar="الرئيسية">Home</a></li>
             <li><a href="#about" data-en="About" data-fr="À propos" data-ar="حول">About</a></li>
             <li><a href="#skills" data-en="Skills" data-fr="Compétences" data-ar="المهارات">Skills</a></li>
+            <li><a href="#projects" data-en="Projects" data-fr="Projets" data-ar="المشاريع">Projects</a></li>
             <li><a href="#social" data-en="Social" data-fr="Réseaux sociaux" data-ar="وسائل التواصل">Social</a></li>
             <li><a href="#contact" data-en="Contact" data-fr="Contact" data-ar="تواصل">Contact</a></li>
+            <li class="lang-selector-nav">
+                <button class="lang-toggle" onclick="toggleLanguageMenu()" title="Change Language">
+                    <i class="fas fa-globe"></i>
+                </button>
+                <div class="lang-dropdown" id="langDropdown">
+                    <button onclick="changeLanguage('en')" class="active">English</button>
+                    <button onclick="changeLanguage('fr')">Français</button>
+                    <button onclick="changeLanguage('ar')">العربية</button>
+                </div>
+            </li>
         </ul>
     </nav>
 
@@ -621,6 +922,33 @@ My goal is to continuously develop my skills, work on meaningful projects, and b
                     <p data-en="Always exploring new technologies and methodologies. Staying ahead of trends to deliver cutting-edge solutions." data-fr="Toujours explorer les nouvelles technologies et méthodologies. Rester à l'avant-garde des tendances pour offrir des solutions de pointe." data-ar="استكشاف التقنيات والمنهجيات الجديدة دائماً. البقاء في طليعة الاتجاهات لتقديم حلول متطورة.">Always exploring new technologies and methodologies. Staying ahead of trends to deliver cutting-edge solutions.</p>
                 </div>
                 
+            </div>
+        </section>
+
+        <section id="projects">
+            <h2 class="section-title" data-en="My Projects" data-fr="Mes projets" data-ar="مشاريعي">My Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <h3>🎬 <span data-en="Video Editing" data-fr="Montage Vidéo" data-ar="تحرير الفيديو">Video Editing</span></h3>
+                    <p data-en="I can make you a High energy gaming and reaction montage with crazy moments, hilarious reactions, and epic gameplay." data-fr="Je peux créer un montage de jeu et réaction haute énergie avec des moments fous, des réactions hilarantes et un gameplay épique." data-ar="يمكنني صنع مقطع ألعاب وردود فعل عالي الطاقة مع لحظات مجنونة وردود فعل مضحكة وألعاب حماسية.">I can make you a High energy gaming and reaction montage with crazy moments, hilarious reactions, and epic gameplay.</p>
+                    <div class="project-links">
+                        <a href="https://drive.google.com/drive/folders/1CDosBrpSJm6I7KZMyKNqMbFLXuaAC9mH?usp=sharing" target="_blank" rel="noopener noreferrer" class="project-link">
+                            <i class="fab fa-google-drive"></i>
+                            <span data-en="Watch Videos" data-fr="Regarder les vidéos" data-ar="مشاهدة الفيديوهات">Watch Videos</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <h3>💻 <span data-en="Web Projects" data-fr="Projets Web" data-ar="مشاريع الويب">Web Projects</span></h3>
+                    <p data-en="Explore my web development portfolio featuring responsive websites and interactive applications built with modern technologies. Click the link below to visit my latest web projects." data-fr="Explorez mon portfolio de développement web présentant des sites Web réactifs et des applications interactives construites avec des technologies modernes. Cliquez sur le lien ci-dessous pour visiter mes derniers projets web." data-ar="استكشف محفظة تطوير الويب الخاصة بي التي تضم مواقع ويب سريعة الاستجابة وتطبيقات تفاعلية مبنية بتقنيات حديثة. انقر على الرابط أدناه لزيارة أحدث مشاريع الويب الخاصة بي.">Explore my web development portfolio featuring responsive websites and interactive applications built with modern technologies. Click the link below to visit my latest web projects.</p>
+                    <div class="project-links">
+                        <a href="https://alielazzaoui.github.io/movies-and-series-game/" target="_blank" rel="noopener noreferrer" class="project-link">
+                            <i class="fas fa-globe"></i>
+                            <span data-en="Visit Website" data-fr="Visiter le site" data-ar="زيارة الموقع">Visit Website</span>
+                        </a>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -794,12 +1122,31 @@ My goal is to continuously develop my skills, work on meaningful projects, and b
                 }
             });
 
-            // Update language buttons
-            document.querySelectorAll('.lang-btn').forEach(btn => {
+            // Update language dropdown active state
+            document.querySelectorAll('.lang-dropdown button').forEach(btn => {
                 btn.classList.remove('active');
             });
-            document.querySelector(`.lang-btn[onclick="changeLanguage('${lang}')"]`).classList.add('active');
+            document.querySelector(`.lang-dropdown button[onclick="changeLanguage('${lang}')"]`).classList.add('active');
+
+            // Close dropdown after selection
+            document.getElementById('langDropdown').classList.remove('active');
         }
+
+        // Toggle language dropdown menu
+        function toggleLanguageMenu() {
+            const dropdown = document.getElementById('langDropdown');
+            dropdown.classList.toggle('active');
+        }
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(event) {
+            const selector = document.querySelector('.lang-selector');
+            const dropdown = document.getElementById('langDropdown');
+            
+            if (!selector.contains(event.target)) {
+                dropdown.classList.remove('active');
+            }
+        });
 
         // Load saved language preference on page load
         window.addEventListener('DOMContentLoaded', function() {
@@ -840,6 +1187,47 @@ My goal is to continuously develop my skills, work on meaningful projects, and b
                     target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             });
+        });
+
+        // Hide navbar and language selector on scroll
+        let lastScrollTop = 0;
+        const nav = document.querySelector('nav');
+
+        window.addEventListener('scroll', function() {
+            let currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+            
+            if (currentScroll > lastScrollTop && currentScroll > 100) {
+                // Scrolling DOWN - hide navbar
+                nav.classList.add('hidden');
+            } else {
+                // Scrolling UP - show navbar
+                nav.classList.remove('hidden');
+            }
+            lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+        });
+
+        // Smooth scroll reveal animation for sections and cards
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0) scale(1)';
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections, cards, and other content
+        document.querySelectorAll('section, .card, .project-card, .social-btn, .about-box, .contact-form, input, textarea, .input-group, h2, p').forEach(element => {
+            element.style.opacity = '0';
+            element.style.transform = 'translateY(30px) scale(0.95)';
+            element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(element);
         });
     </script>
 
